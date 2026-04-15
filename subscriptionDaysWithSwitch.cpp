@@ -7,7 +7,7 @@ int main()
     std::mt19937 gen(rd());
     std::uniform_int_distribution<>distrib(0,11);
 
-    int random_num= distrib(gen);
+    int daysUntilExpiration= distrib(gen);
 
    switch (random_num)
    {
@@ -15,7 +15,7 @@ int main()
         std::cout <<"Your subscription will expire soon. Renew now! \n";
     break;
    case 3:
-        std::cout <<"Your subscription will expire in"<< random_num <<"\n Renew now and save 10%!";
+        std::cout <<"Your subscription will expire in"<< daysUntilExpiration <<"\n Renew now and save 10%!";
     break;
    case 2:
         std::cout <<"Your subscription will expire within a day!"<< "\n Renew now and save 20%!";
