@@ -15,6 +15,10 @@ class Rectangle {
             length = l;
             width = w;
         }
+
+        ~Rectangle() {
+            // Destructor code (if needed)
+        }
     
    /*void setValue(float x, float y){
         length = x;
@@ -25,7 +29,4 @@ class Rectangle {
     float getArea(){
         return length * width; 
    }
-
-   
-    // ~Rectangle();
 };
