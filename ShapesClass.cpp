@@ -1,89 +1,78 @@
 #include <iostream>
+#include "Circle.h"
+#include "Triangle.h"
+#include "Square.h"
+
+
 using namespace std;
-
 namespace shapes {
-    class Square{
-        private:
-            float s;
-        public:
-            Square(){
-                s = 0.0;
-            }
-
-            Square(float side){
-                s = side;
-            }
-            ~Square() {
-                // Destructor code (if needed)
-            }
-    }
-
-    class Rectangle {
-        private:
-            float length;
-            float width;
-        public:
-            Rectangle(){
-                length = 0.0;
-                width = 0.0;
-            }
-
-            Rectangle(float l, float w){
-                length = l;
-                width = w;
-            }
-            ~Rectangle() {
-                // Destructor code (if needed)
-            }
-    }
-
-    class Circle {
-        private:
-            float r;
-        public:
-            Circle(){
-                r = 0.0;
-            }
-
-            Circle(float radius){
-                r = radius;
-            }
-            ~Circle() {
-                // Destructor code (if needed)
-            }
-        }
-
     class Area {
         public:
-            float calculateSquareArea(shapes::Square& side){
-                return side * side;
+            static float calculateSquareArea(shapes::Square& sq){
+                return sq.getLength() * sq.getLength();
             }
 
-            float calculateRectangleArea(shapes::Rectangle& rect){
-                return rect.getLength() * rect.getWidth();
+            static float calculateTriangleArea(shapes::Triangle& tri){
+                return 0.5f * tri.getBase() * tri.getHeight();
             }
 
-            float calculateCircleArea(shapes::Circle& circ){
-                return 3.14159 * circ.getRadius() * circ.getRadius();
+            static float calculateCircleArea(shapes::Circle& circ){
+                return 3.14159f * circ.getRadius() * circ.getRadius();
             }
-    }
-}
+    };
+};
 
 int main()
 {
-    float sideLength, rectLength, rectWidth, circleRadius;
+    float sideLength, base, height, radius;
+    int option = 0;
 
-    cout << "Calculate the area of a square: 1 "<< endl;
-    cout << "Calculate the area of triangle: 2" << endl;
-    cout << "Calculate the area of a rectangle: 3"<< endl;
-    cout << "Calculate the area of a circle: 4" << endl;
-    cout << "Quit: 5" << endl;
+    while (option != 4) {
+        cout << "Calculate the area of a square: 1 "<< endl;
+        cout << "Calculate the area of triangle: 2" << endl;
+        cout << "Calculate the area of a circle: 3" << endl;
+        cout << "Quit: 4" << endl;
 
-    shapes::Square sq;
-    shapes::Rectangle rect;
-    shapes::Circle circ;
-    shapes::Area area;
+        cin >> option;
 
+        switch (option)
+        {
+        case 1:
+            {
+                shapes::Square sq;
+                cout << "Enter length of square: ";
+                cin >> sideLength;
+                sq.setLength(sideLength);
+                cout << "Area of square is: " << shapes::Area::calculateSquareArea(sq) << endl;
+            }
+            break;
+        case 2:
+            {
+                shapes::Triangle tri;
+                cout << "Enter base and height of triangle: ";
+                cin >> base >> height;
+                tri.setBase(base);
+                tri.setHeight(height);
+                cout << "Area of triangle is: " << shapes::Area::calculateTriangleArea(tri) << endl;
+            }
+            break;
+        case 3:
+            {
+                shapes::Circle circ;
+                cout << "Enter radius of circle: ";
+                cin >> radius;
+                circ.setRadius(radius);
+                cout << "Area of circle is: " << shapes::Area::calculateCircleArea(circ) << endl;
+            }
+            break;
+        case 4:
+            cout << "Exiting program..." << endl;
+            break;
+        default:
+            cout << "Invalid option" << endl;
+            break;
+        }
+    }
 
     return 0;
 }
